@@ -13,17 +13,9 @@ import java.time.LocalDateTime;
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(nullable = false, unique = true, length = 10)
     private String parkingNumber;
-    @Column(nullable = false, unique = true, length = 7)
-    private String plateCar;
-    @Column(nullable = false, length = 70)
-    private String brandCar;
-    @Column(nullable = false, length = 70)
-    private String modelCar;
-    @Column(nullable = false, length = 70)
-    private String colorCar;
     @Column(nullable = false)
     private LocalDateTime registrationDate;
     @Column(nullable = false, length = 130)
@@ -33,23 +25,23 @@ public class Parking {
     @Column(nullable = false, length = 30)
     private String block;
 
+    @OneToOne
+    Car car;
+
     public Parking(){
 
     }
 
-    public Parking(String parkingNumber, String plateCar, String brandCar, String modelCar, String colorCar, LocalDateTime registrationDate, String responsibleName, String apartment, String block) {
+    public Parking(String parkingNumber, LocalDateTime registrationDate, String responsibleName, String apartment, String block, Car car) {
         this.parkingNumber = parkingNumber;
-        this.plateCar = plateCar;
-        this.brandCar = brandCar;
-        this.modelCar = modelCar;
-        this.colorCar = colorCar;
         this.registrationDate = registrationDate;
         this.responsibleName = responsibleName;
         this.apartment = apartment;
         this.block = block;
+        this.car = car;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,37 +53,6 @@ public class Parking {
         this.parkingNumber = parkingNumber;
     }
 
-    public String getPlateCar() {
-        return plateCar;
-    }
-
-    public void setPlateCar(String plateCar) {
-        this.plateCar = plateCar;
-    }
-
-    public String getBrandCar() {
-        return brandCar;
-    }
-
-    public void setBrandCar(String brandCar) {
-        this.brandCar = brandCar;
-    }
-
-    public String getModelCar() {
-        return modelCar;
-    }
-
-    public void setModelCar(String modelCar) {
-        this.modelCar = modelCar;
-    }
-
-    public String getColorCar() {
-        return colorCar;
-    }
-
-    public void setColorCar(String colorCar) {
-        this.colorCar = colorCar;
-    }
 
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
@@ -121,19 +82,24 @@ public class Parking {
         this.block = block;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     @Override
     public String toString() {
         return "Parking{" +
                 "id=" + id +
                 ", parkingNumber='" + parkingNumber + '\'' +
-                ", plateCar='" + plateCar + '\'' +
-                ", brandCar='" + brandCar + '\'' +
-                ", modelCar='" + modelCar + '\'' +
-                ", colorCar='" + colorCar + '\'' +
                 ", registrationDate=" + registrationDate +
                 ", responsibleName='" + responsibleName + '\'' +
                 ", apartment='" + apartment + '\'' +
                 ", block='" + block + '\'' +
+                ", car=" + car +
                 '}';
     }
 }
