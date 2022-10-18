@@ -25,7 +25,7 @@ public class Parking {
     @Column(nullable = false, length = 30)
     private String block;
 
-    @OneToOne
+    @OneToOne(mappedBy = "parking")
     Car car;
 
     public Parking(){
