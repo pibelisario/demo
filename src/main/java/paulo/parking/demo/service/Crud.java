@@ -31,7 +31,6 @@ public class Crud {
         Parking parking = initialInfo(in);
         repositoryCar.save(car);
         repositoryParking.save(parking);
-
         System.out.println("Success.");
 
     }
@@ -45,6 +44,7 @@ public class Crud {
 
         if (optional.isPresent()) {
             repositoryParking.delete(optional.get());
+            repositoryCar.delete(optional.get().getCar());
             System.out.println("Deleted with success.");
         } else {
             System.out.println("Parking not found.");
@@ -94,7 +94,6 @@ public class Crud {
 
         if (!control()) {
             car = new Car(plateCar, brandCar, modelCar, colorCar);
-
             Parking pk = new Parking(parkingNumber, LocalDateTime.now(), resposibleName, apartment, block, car);
             return pk;
         } else {

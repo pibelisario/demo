@@ -18,8 +18,7 @@ public class Car {
     @Column(nullable = false, length = 70)
     private String colorCar;
 
-    @OneToOne
-    @JoinColumn(name = "parking_id")
+    @OneToOne(mappedBy = "car")
     Parking parking;
 
     public Car() {
